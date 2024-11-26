@@ -10,13 +10,19 @@ class DataManager {
     // Function to fetch quiz data from backend or local data
     func fetchQuizData(completion: @escaping ([QuizQuestion]) -> Void) {
         // Replace the URL below with your actual backend endpoint
-        guard let url = URL(string: "http://your-backend-endpoint/quiz-data") else {
+        guard let url = URL(string: "https://studybuddyapi.com/api/quiz-data/") else {
             print("Invalid URL for quiz data")
             return
         }
         
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        // If using authentication, add your token or credentials here
+        // request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
+        
         // Fetch data from the backend
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error fetching quiz data: \(error.localizedDescription)")
                 return
@@ -42,13 +48,19 @@ class DataManager {
     // Function to fetch flashcards from backend or local data
     func fetchFlashcards(completion: @escaping ([Flashcard]) -> Void) {
         // Replace the URL below with your actual backend endpoint
-        guard let url = URL(string: "http://your-backend-endpoint/flashcards") else {
+        guard let url = URL(string: "https://studybuddyapi.com/api/flashcards/") else {
             print("Invalid URL for flashcard data")
             return
         }
         
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        // If using authentication, add your token or credentials here
+        // request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
+        
         // Fetch data from the backend
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error fetching flashcard data: \(error.localizedDescription)")
                 return
@@ -74,13 +86,19 @@ class DataManager {
     // Function to fetch personalized study suggestions
     func fetchStudySuggestions(completion: @escaping ([String]) -> Void) {
         // Replace the URL below with your actual backend endpoint
-        guard let url = URL(string: "http://your-backend-endpoint/study-suggestions") else {
+        guard let url = URL(string: "https://studybuddyapi.com/api/study-suggestions/") else {
             print("Invalid URL for study suggestions")
             return
         }
         
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        // If using authentication, add your token or credentials here
+        // request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
+        
         // Fetch data from the backend
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error fetching study suggestions: \(error.localizedDescription)")
                 return
@@ -106,7 +124,7 @@ class DataManager {
     // Function to submit quiz results to backend
     func submitQuizResults(_ results: [String: Any], completion: @escaping (Bool) -> Void) {
         // Replace the URL below with your actual backend endpoint
-        guard let url = URL(string: "http://your-backend-endpoint/submit-quiz-results") else {
+        guard let url = URL(string: "https://studybuddyapi.com/api/submit-quiz-results/") else {
             print("Invalid URL for submitting quiz results")
             return
         }
@@ -114,6 +132,9 @@ class DataManager {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // If using authentication, add your token or credentials here
+        // request.setValue("Bearer YOUR_ACCESS_TOKEN", forHTTPHeaderField: "Authorization")
         
         do {
             // Encode the quiz results to JSON
@@ -142,3 +163,4 @@ class DataManager {
         }
     }
 }
+
